@@ -383,3 +383,24 @@ VALUES
     'user4@semanticsquare.com', 'test', 
     'Dheeru', 'M', 0, 2, NOW()
   );
+CREATE TABLE User_Book (
+  id bigint(20) PRIMARY KEY auto_increment, 
+  user_id bigint(20) not null, 
+  book_id bigint(20) not null, 
+  FOREIGN KEY (user_id) REFERENCES User(id), 
+  FOREIGN KEY (book_id) REFERENCES Book(id)
+);
+CREATE TABLE User_Movie (
+  id bigint(20) PRIMARY KEY auto_increment, 
+  user_id bigint(20) not null, 
+  movie_id bigint(20) not null, 
+  FOREIGN KEY (user_id) REFERENCES User(id), 
+  FOREIGN KEY (movie_id) REFERENCES Movie(id)
+);
+CREATE TABLE User_WebLink (
+  id bigint(20) PRIMARY KEY auto_increment, 
+  user_id bigint(20) not null, 
+  weblink_id bigint(20) not null, 
+  FOREIGN KEY (user_id) REFERENCES User(id), 
+  FOREIGN KEY (weblink_id) REFERENCES WebLink(id)
+);
