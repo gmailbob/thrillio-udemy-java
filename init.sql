@@ -281,7 +281,7 @@ INSERT INTO WebLink (
 VALUES 
   (
     'Use
-Final Liberally', 'http://http://www.javapractices.com/topic/TopicAction.do?Id=23', 
+Final Liberally', 'http://www.javapractices.com/topic/TopicAction.do?Id=23', 
     'http://www.javapractices.com', 
     2, NOW()
   );
