@@ -26,6 +26,10 @@ public class DataStore {
 		loadWebLinks();
 		loadMovies();
 		loadBooks();
+		// Load Driver and remember that we have three approaches to get the
+		// Class object. So Class.forName("com.mysql.jdbc.Driver") is also good
+		// but need to wrap it in a try-catch block
+		System.out.println(com.mysql.jdbc.Driver.class + " is loaded.");
 	}
 
 	private static void loadUsers() {
