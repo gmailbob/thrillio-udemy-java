@@ -72,10 +72,14 @@ public class BookmarkManager {
 	public void setKidFridenlyStatus(User user, KidFriendlyStatus status, Bookmark bookmark) {
 		bookmark.setKidFridenlyMarkedBy(user);
 		bookmark.setKidFridenlyStatus(status);
+
+		dao.updateKidFriendlyStatus(bookmark);
 	}
 
 	public void share(User user, Bookmark bookmark) {
 		bookmark.setSharedBy(user);
 		System.out.println("data: " + ((Shareable) bookmark).getItemData() + " was shared");
+
+		dao.updateSharedBy(bookmark);
 	}
 }

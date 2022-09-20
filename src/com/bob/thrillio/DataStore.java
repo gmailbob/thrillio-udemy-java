@@ -20,13 +20,18 @@ public class DataStore {
 		return bookmarks;
 	}
 
-	private static List<UserBookmark> userBookmarks = new ArrayList<>();
-
 	public static void loadData() {
-		// Load Driver and remember that we have three approaches to get the
-		// Class object. So Class.forName("com.mysql.jdbc.Driver") is also good
-		// but need to wrap it in a try-catch block
-		System.out.println(com.mysql.jdbc.Driver.class + " is loaded.");
+		/*- Old fashioned code to load driver:
+		 * Class.forName("com.mysql.jdbc.Driver")
+		 * My choice: com.mysql.jdbc.Driver.class.getName() (no checked exception)
+		 * 
+		 * However, class com.mysql.jdbc.Driver is deprecated. The new driver class is com.mysql.cj.jdbc.Driver 
+		 * What's more, since Java 6 (JDBC 4.0) it is usually not necessary to manually load the driver class
+		 * https://stackoverflow.com/questions/52344453/loading-class-com-mysql-jdbc-driver-is-deprecated-message
+		 * 
+		 * "The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary"
+		 * -- from com.mysql.jdbc.Driver byte code
+		 */
 
 		// try-with-resource
 		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/thrillio", "root", "");
@@ -35,6 +40,8 @@ public class DataStore {
 			loadWebLinks(stmt);
 			loadMovies(stmt);
 			loadBooks(stmt);
+			// add by myself
+			clearUserBookmark(stmt);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -129,7 +136,12 @@ public class DataStore {
 		bookmarks.add(bookmarkList);
 	}
 
-	public static void add(UserBookmark userBookmark) {
-		userBookmarks.add(userBookmark);
+	private static void clearUserBookmark(Statement stmt) throws SQLException {
+		String query = "delete from user_movie";
+		stmt.executeUpdate(query);
+		query = "delete from user_book;";
+		stmt.executeUpdate(query);
+		query = "delete from user_weblink;";
+		stmt.executeUpdate(query);
 	}
 }

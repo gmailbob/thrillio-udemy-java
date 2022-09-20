@@ -404,3 +404,39 @@ CREATE TABLE User_WebLink (
   FOREIGN KEY (user_id) REFERENCES User(id), 
   FOREIGN KEY (weblink_id) REFERENCES WebLink(id)
 );
+ALTER TABLE 
+  Book 
+ADD 
+  COLUMN kid_friendly_marked_by bigint 
+AFTER 
+  kid_friendly_status, 
+ADD 
+  COLUMN shared_by bigint 
+AFTER 
+  kid_friendly_marked_by, 
+ADD 
+  FOREIGN KEY (kid_friendly_marked_by) REFERENCES User(id), 
+ADD 
+  FOREIGN KEY (shared_by) REFERENCES User(id);
+ALTER TABLE 
+  WebLink 
+ADD 
+  COLUMN kid_friendly_marked_by bigint 
+AFTER 
+  kid_friendly_status, 
+ADD 
+  COLUMN shared_by bigint 
+AFTER 
+  kid_friendly_marked_by, 
+ADD 
+  FOREIGN KEY (kid_friendly_marked_by) REFERENCES User(id), 
+ADD 
+  FOREIGN KEY (shared_by) REFERENCES User(id);
+ALTER TABLE 
+  Movie 
+ADD 
+  COLUMN kid_friendly_marked_by bigint 
+AFTER 
+  kid_friendly_status, 
+ADD 
+  FOREIGN KEY (kid_friendly_marked_by) REFERENCES User(id);
