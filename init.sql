@@ -440,3 +440,41 @@ AFTER
   kid_friendly_status, 
 ADD 
   FOREIGN KEY (kid_friendly_marked_by) REFERENCES User(id);
+  
+ALTER TABLE 
+  Book 
+ADD 
+  COLUMN image_url varchar(500) 
+AFTER 
+  title;
+UPDATE 
+  BOOK 
+SET 
+  image_url = 'https://images.gr-assets.com/books/1465675526l/16902.jpg' 
+where 
+  id = 1;
+UPDATE 
+  BOOK 
+SET 
+  image_url = 'https://images.gr-assets.com/books/1520778510l/123845.jpg' 
+where 
+  id = 2;
+UPDATE 
+  BOOK 
+SET 
+  image_url = 'https://images.gr-assets.com/books/1347739312l/1270698.jpg' 
+where 
+  id = 3;
+UPDATE 
+  BOOK 
+SET 
+  image_url = 'https://images.gr-assets.com/books/1408309444l/58128.jpg' 
+where 
+  id = 4;
+UPDATE 
+  BOOK 
+SET 
+  image_url = 'https://images.gr-assets.com/books/1433511045l/105099.jpg' 
+where 
+  id = 5;
+
